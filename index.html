@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#020706">
+
+<title>NEON AI T/N</title>
+
+<style>
+:root{
+    --bg:#020706;
+    --panel:#06120f;
+    --panel2:#081813;
+    --green:#00ff9c;
+    --cyan:#00d9ff;
+    --yellow:#ffe66d;
+    --red:#ff416c;
+    --text:#dcfff2;
+    --muted:#638b7d;
+}
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    margin:0;
+    padding:12px;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(0,255,156,.14),
+            transparent 40%
+        ),
+        #020706;
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,
+    "Segoe UI",sans-serif;
+}
+
+.app{
+    max-width:650px;
+    margin:auto;
+}
+
+.header{
+    text-align:center;
+    margin:8px 0 15px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:1000;
+    letter-spacing:4px;
+    color:var(--green);
+    text-shadow:
+        0 0 8px var(--green),
+        0 0 25px rgba(0,255,156,.55);
+}
+
+.sub{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:8px;
+    letter-spacing:2px;
+}
+
+/* MAIN */
+
+.main{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,255,156,.055),
+            rgba(0,217,255,.025)
+        ),
+        var(--panel);
+    border:1px solid rgba(0,255,156,.25);
+    border-radius:20px;
+    padding:17px;
+    text-align:center;
+    box-shadow:
+        0 0 30px rgba(0,255,156,.06),
+        inset 0 0 30px rgba(0,255,156,.02);
+}
+
+.label{
+    font-size:9px;
+    letter-spacing:3px;
+    color:var(--muted);
+}
+
+.pred{
+    margin:7px 0;
+    font-size:88px;
+    line-height:1;
+    font-weight:1000;
+    color:var(--green);
+    text-shadow:
+        0 0 7px var(--green),
+        0 0 30px var(--green),
+        0 0 65px rgba(0,255,156,.4);
+}
+
+.pred.n{
+    color:var(--cyan);
+    text-shadow:
+        0 0 7px var(--cyan),
+        0 0 30px var(--cyan),
+        0 0 65px rgba(0,217,255,.4);
+}
+
+.conf{
+    font-size:12px;
+    margin-bottom:10px;
+}
+
+.bar{
+    height:8px;
+    background:#10211c;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.barIn{
+    width:50%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        var(--cyan),
+        var(--green)
+    );
+    box-shadow:0 0 13px var(--green);
+    transition:.25s;
+}
+
+.percent{
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted);
+    font-size:9px;
+    margin-top:6px;
+}
+
+/* CURRENT */
+
+.box{
+    background:var(--panel);
+    border:1px solid rgba(0,255,156,.14);
+    border-radius:15px;
+    padding:13px;
+    margin-top:10px;
+}
+
+.title{
+    color:var(--muted);
+    font-size:8px;
+    letter-spacing:2px;
+    margin-bottom:9px;
+}
+
+.slots{
+    display:flex;
+    justify-content:center;
+    gap:7px;
+}
+
+.slot{
+    width:52px;
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:11px;
+    background:#03100d;
+    border:1px solid rgba(0,255,156,.18);
+    color:var(--green);
+    font-size:24px;
+    font-weight:1000;
+}
+
+.slot.n{
+    color:var(--cyan);
+}
+
+.slot.empty{
+    color:#24473c;
+}
+
+/* BUTTONS */
+
+.buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-top:10px;
+}
+
+.btn{
+    height:70px;
+    border-radius:15px;
+    background:#06130f;
+    border:1px solid rgba(0,255,156,.22);
+    color:var(--green);
+    font-size:31px;
+    font-weight:1000;
+    cursor:pointer;
+    touch-action:manipulation;
+}
+
+.btn.n{
+    color:var(--cyan);
+    border-color:rgba(0,217,255,.23);
+}
+
+.btn:active{
+    transform:scale(.96);
+    box-shadow:0 0 25px rgba(0,255,156,.18);
+}
+
+/* ANALYSIS */
+
+.analysis{
+    margin-top:10px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,255,156,.045),
+            rgba(0,217,255,.035)
+        ),
+        var(--panel2);
+    border:1px solid rgba(0,255,156,.2);
+    border-radius:16px;
+    padding:13px;
+}
+
+.analysisHead{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.analysisName{
+    color:var(--green);
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.badge{
+    font-size:7px;
+    color:var(--green);
+    border:1px solid rgba(0,255,156,.25);
+    padding:4px 7px;
+    border-radius:20px;
+}
+
+/* PREFIX */
+
+.prefixBox{
+    margin-top:10px;
+    padding:11px;
+    background:#03100d;
+    border:1px solid rgba(0,255,156,.1);
+    border-radius:11px;
+}
+
+.prefixTitle{
+    font-size:8px;
+    color:var(--muted);
+    letter-spacing:2px;
+}
+
+.prefixValue{
+    margin-top:5px;
+    font-family:monospace;
+    font-size:20px;
+    font-weight:1000;
+    color:var(--cyan);
+}
+
+.prefixInfo{
+    margin-top:5px;
+    font-size:8px;
+    line-height:1.5;
+    color:#638b7d;
+}
+
+.reason{
+    margin-top:10px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+}
+
+.reasonItem{
+    padding:8px;
+    border-radius:9px;
+    background:#04100d;
+    border:1px solid rgba(0,255,156,.07);
+}
+
+.reasonName{
+    font-size:8px;
+    color:var(--muted);
+}
+
+.reasonValue{
+    margin-top:4px;
+    font-size:12px;
+    font-weight:900;
+    color:var(--green);
+}
+
+.reasonValue.n{
+    color:var(--cyan);
+}
+
+.verdict{
+    margin-top:10px;
+    padding:10px;
+    border-radius:10px;
+    background:#03100d;
+    border:1px solid rgba(0,255,156,.1);
+    font-size:10px;
+    line-height:1.5;
+}
+
+.verdict strong{
+    color:var(--green);
+}
+
+/* ENGINES */
+
+.engines{
+    margin-top:10px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+}
+
+.engine{
+    padding:9px;
+    background:#05100d;
+    border:1px solid rgba(0,255,156,.08);
+    border-radius:10px;
+}
+
+.eName{
+    font-size:7px;
+    color:var(--muted);
+}
+
+.ePred{
+    margin-top:3px;
+    font-size:19px;
+    font-weight:1000;
+    color:var(--green);
+}
+
+.ePred.n{
+    color:var(--cyan);
+}
+
+.ePct{
+    margin-top:2px;
+    font-size:7px;
+    color:#638d7e;
+}
+
+/* HISTORY */
+
+.history{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    max-height:170px;
+    overflow:auto;
+}
+
+.sample{
+    padding:6px 8px;
+    border-radius:7px;
+    background:#071a14;
+    border:1px solid rgba(0,255,156,.1);
+    color:var(--green);
+    font-family:monospace;
+    font-size:11px;
+    font-weight:900;
+}
+
+.sample.current{
+    color:var(--cyan);
+    border-color:rgba(0,217,255,.3);
+}
+
+.controls{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    margin-top:10px;
+}
+
+.control{
+    height:40px;
+    border-radius:9px;
+    background:#06110e;
+    color:var(--text);
+    border:1px solid rgba(0,255,156,.12);
+    font-weight:700;
+    cursor:pointer;
+}
+
+.note{
+    margin:9px 3px;
+    text-align:center;
+    font-size:7px;
+    line-height:1.5;
+    color:#486d60;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="header">
+    <div class="logo">NEON AI</div>
+    <div class="sub">
+        PREFIX · PATTERN · MULTI-ENGINE
+    </div>
+</div>
+
+
+<!-- FINAL -->
+
+<div class="main">
+
+    <div class="label">
+        DỰ ĐOÁN KÝ TỰ TIẾP THEO
+    </div>
+
+    <div id="pred" class="pred">—</div>
+
+    <div id="conf" class="conf">
+        Chưa có dữ liệu
+    </div>
+
+    <div class="bar">
+        <div id="barIn" class="barIn"></div>
+    </div>
+
+    <div class="percent">
+        <span id="tp">T 50%</span>
+        <span id="np">N 50%</span>
+    </div>
+
+</div>
+
+
+<!-- CURRENT SAMPLE -->
+
+<div class="box">
+
+    <div class="title">
+        MẪU ĐANG NHẬP · 4 KÝ TỰ
+    </div>
+
+    <div id="slots" class="slots"></div>
+
+</div>
+
+
+<!-- INPUT -->
+
+<div class="buttons">
+
+    <button type="button"
+            class="btn"
+            onclick="add('T')">
+        T
+    </button>
+
+    <button type="button"
+            class="btn n"
+            onclick="add('N')">
+        N
+    </button>
+
+</div>
+
+
+<!-- ANALYSIS -->
+
+<div class="analysis">
+
+    <div class="analysisHead">
+
+        <div class="analysisName">
+            PATTERN REASONING
+        </div>
+
+        <div class="badge">
+            PREFIX MATCH
+        </div>
+
+    </div>
+
+
+    <div class="prefixBox">
+
+        <div class="prefixTitle">
+            CONTEXT HIỆN TẠI
+        </div>
+
+        <div id="prefixValue"
+             class="prefixValue">
+            —
+        </div>
+
+        <div id="prefixInfo"
+             class="prefixInfo">
+            Chưa có dữ liệu
+        </div>
+
+    </div>
+
+
+    <div id="reasons"
+         class="reason">
+    </div>
+
+
+    <div id="verdict"
+         class="verdict">
+        Đang chờ dữ liệu...
+    </div>
+
+</div>
+
+
+<!-- ENGINES -->
+
+<div id="engines"
+     class="engines">
+</div>
+
+
+
+<!-- ADVANCED: CONTEXT TREE + GAP DISTRIBUTION -->
+<div class="box">
+    <div class="title">CONTEXT TREE · GAP DISTRIBUTION</div>
+    <div id="advancedStats"
+         style="font-size:8px;line-height:1.6;color:#638b7d;">
+        Chưa có dữ liệu
+    </div>
+</div>
+
+<!-- HISTORY -->
+
+<div class="box">
+
+    <div class="title">
+        TOÀN BỘ LỊCH SỬ MẪU
+    </div>
+
+    <div id="history"
+         class="history">
+    </div>
+
+    <div class="controls">
+
+        <button type="button"
+                class="control"
+                onclick="undo()">
+            ↶ UNDO
+        </button>
+
+        <button type="button"
+                class="control"
+                onclick="resetAll()">
+            RESET
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="note">
+    Mỗi 4 ký tự là một mẫu độc lập.
+    TNTN = một mẫu hoàn chỉnh.
+    Không sử dụng sliding window.
+</div>
+
+</div>
+
+
+<script>
+/* =========================================================
+   NEON AI T/N — POSITION LEARNING ENGINE
+   - Mỗi 4 ký tự = 1 token độc lập.
+   - Không sliding window 4 ký tự.
+   - Học từng vị trí 1..4.
+   - Dự đoán tuần tự: prefix 1 -> 2 -> 3 -> 4.
+   - Context giữa các token hoàn chỉnh.
+   - Gap Memory + Similar Pattern + Bayesian smoothing.
+   - Online engine scoring / adaptive fusion.
+   ========================================================= */
+
+const KEY = "NEON_POSITION_TN_V2";
+
+let history = [];
+let current = [];
+let pending = null;
+
+const ENGINES = [
+    "PREFIX MATCH",
+    "POSITION MEMORY",
+    "SIMILAR PATTERN",
+    "N-GRAM",
+    "MARKOV",
+    "GAP",
+    "ADAPTIVE"
+];
+
+const clamp = (x,a=0,b=1) => Math.max(a,Math.min(b,x));
+const pct = x => (x*100).toFixed(1);
+const prediction = p => p >= .5 ? "T" : "N";
+const avg = a => a.length ? a.reduce((s,x)=>s+x,0)/a.length : .5;
+
+function tokens(){
+    return history.map(x => Array.isArray(x) ? x.join("") : String(x));
+}
+
+function save(){
+    localStorage.setItem(KEY, JSON.stringify({history,current}));
+}
+
+function load(){
+    try{
+        const d = JSON.parse(localStorage.getItem(KEY) || "null");
+        if(d){
+            history = Array.isArray(d.history)
+                ? d.history.map(x => String(Array.isArray(x) ? x.join("") : x).replace(/[^TN]/gi,"").slice(0,4).split(""))
+                : [];
+            current = Array.isArray(d.current)
+                ? d.current.map(x => String(x).toUpperCase()).filter(x => x==="T" || x==="N").slice(0,3)
+                : [];
+        }
+    }catch(e){
+        history = [];
+        current = [];
+    }
+}
+
+/* =========================================================
+   PERFORMANCE MEMORY
+   ========================================================= */
+
+function getScores(){
+    try{
+        const x = JSON.parse(localStorage.getItem(KEY+"_SCORES") || "[]");
+        return Array.isArray(x) ? x : [];
+    }catch(e){
+        return [];
+    }
+}
+
+function saveScore(item){
+    const data = getScores();
+    data.push(item);
+    if(data.length > 5000) data.splice(0, data.length-5000);
+    localStorage.setItem(KEY+"_SCORES", JSON.stringify(data));
+}
+
+function engineAccuracy(name, position=null){
+    const data = getScores();
+    let correct=0, total=0;
+
+    for(const x of data){
+        if(!x.engines || !x.engines[name]) continue;
+        if(position && x.position !== position) continue;
+        total++;
+        if(x.engines[name] === x.actual) correct++;
+    }
+
+    /* Bayesian prior: chưa đủ mẫu thì giữ gần 50%. */
+    if(total < 5) return .5;
+    return (correct + 1) / (total + 2);
+}
+
+/* =========================================================
+   POSITION MEMORY
+   Học riêng vị trí 1,2,3,4.
+   ========================================================= */
+
+function positionMemory(pos){
+    const ts = tokens();
+    if(!ts.length) return {p:.5,count:0,t:0,n:0};
+
+    let t=0,n=0;
+
+    for(const token of ts){
+        const ch = token[pos];
+        if(ch==="T") t++;
+        else if(ch==="N") n++;
+    }
+
+    const total=t+n;
+    return {
+        p: total ? (t+1)/(total+2) : .5,
+        count: total,
+        t,
+        n
+    };
+}
+
+/* =========================================================
+   PREFIX MATCH
+   Dùng chính context đang nhập để dự đoán ký tự kế tiếp.
+   Ví dụ TN -> nhìn các token bắt đầu bằng TN rồi lấy vị trí 3.
+   TNT -> lấy vị trí 4.
+   ========================================================= */
+
+function prefixMatch(ctx=current.join("")){
+    const ts=tokens();
+    const len=ctx.length;
+
+    if(!len || len>=4) return {p:.5,count:0,t:0,n:0,level:len};
+
+    let t=0,n=0;
+
+    for(const token of ts){
+        if(token.startsWith(ctx)){
+            const next=token[len];
+            if(next==="T") t++;
+            if(next==="N") n++;
+        }
+    }
+
+    const total=t+n;
+    return {
+        p: total ? (t+1)/(total+2) : .5,
+        count: total,
+        t,
+        n,
+        level: len
+    };
+}
+
+/* =========================================================
+   BACKOFF PREFIX
+   Nếu context dài chưa đủ dữ liệu, giảm từ:
+   TNT -> TN -> T -> global position.
+   ========================================================= */
+
+function backoffPrefix(ctx=current.join("")){
+    const candidates=[];
+
+    for(let len=ctx.length; len>=1; len--){
+        const r=prefixMatch(ctx.slice(0,len));
+        if(r.count){
+            candidates.push({
+                ...r,
+                context:ctx.slice(0,len)
+            });
+        }
+    }
+
+    if(!candidates.length){
+        return {
+            p: positionMemory(ctx.length).p,
+            count: 0,
+            context:"",
+            level:0,
+            source:"POSITION"
+        };
+    }
+
+    /* Context dài được ưu tiên, nhưng không để 1-2 mẫu áp đảo. */
+    let score=0,weight=0;
+
+    for(const r of candidates){
+        const strength = Math.min(1, r.count/8);
+        const w = (0.65 + r.level*.55) * (0.55 + strength);
+        score += r.p*w;
+        weight += w;
+    }
+
+    const best=candidates[0];
+
+    return {
+        p: weight ? score/weight : best.p,
+        count:best.count,
+        context:best.context,
+        level:best.level,
+        source:"PREFIX/BACKOFF"
+    };
+}
+
+/* =========================================================
+   SIMILAR PATTERN
+   Tìm token giống context hiện tại theo từng vị trí.
+   ========================================================= */
+
+function similarPattern(ctx=current.join("")){
+    const ts=tokens();
+    const len=ctx.length;
+
+    if(!len || !ts.length) return {p:.5,matches:0};
+
+    let tScore=0,nScore=0,total=0,matches=0;
+
+    for(const token of ts){
+        let same=0;
+
+        for(let i=0;i<len;i++){
+            if(token[i]===ctx[i]) same++;
+        }
+
+        if(!same || !token[len]) continue;
+
+        const similarity=same/len;
+        const weight=Math.pow(similarity,3);
+
+        if(token[len]==="T") tScore+=weight;
+        else nScore+=weight;
+
+        total+=weight;
+        matches++;
+    }
+
+    if(!total) return {p:.5,matches:0};
+
+    return {
+        p:(tScore+1)/(total+2),
+        matches,
+        weight:total
+    };
+}
+
+/* =========================================================
+   N-GRAM TRÊN CÁC TOKEN 4 KÝ TỰ
+   Học chuỗi mẫu hoàn chỉnh, không cắt sliding window.
+   ========================================================= */
+
+function ngram(){
+    const ts=tokens();
+    if(ts.length<2) return .5;
+
+    let score=0,weight=0;
+
+    for(let len=1;len<=4;len++){
+        if(ts.length<=len) continue;
+
+        const context=ts.slice(-len).join("|");
+        let t=0,n=0;
+
+        for(let i=len;i<ts.length;i++){
+            if(ts.slice(i-len,i).join("|") !== context) continue;
+            if(ts[i][0]==="T") t++;
+            else n++;
+        }
+
+        const total=t+n;
+        if(!total) continue;
+
+        const p=(t+1)/(total+2);
+        const w=(1+len*.65)*Math.log2(total+2);
+
+        score+=p*w;
+        weight+=w;
+    }
+
+    return weight ? score/weight : .5;
+}
+
+/* =========================================================
+   MARKOV TRÊN TOKEN HOÀN CHỈNH
+   ========================================================= */
+
+function markov(){
+    const ts=tokens();
+    if(ts.length<2) return .5;
+
+    const last=ts[ts.length-1];
+    let t=0,n=0;
+
+    for(let i=0;i<ts.length-1;i++){
+        if(ts[i]!==last) continue;
+        if(ts[i+1][0]==="T") t++;
+        else if(ts[i+1][0]==="N") n++;
+    }
+
+    return (t+1)/(t+n+2);
+}
+
+/* =========================================================
+   GAP MEMORY
+   Theo dõi khoảng cách giữa các lần prefix xuất hiện.
+   Chỉ là tín hiệu phụ.
+   ========================================================= */
+
+function gapEngine(ctx=current.join("")){
+    const ts=tokens();
+    if(ts.length<3 || !ctx) return .5;
+
+    const positions=[];
+
+    for(let i=0;i<ts.length;i++){
+        if(ts[i].startsWith(ctx)) positions.push(i);
+    }
+
+    if(positions.length<2) return .5;
+
+    const gaps=[];
+    for(let i=1;i<positions.length;i++){
+        gaps.push(positions[i]-positions[i-1]);
+    }
+
+    const avgGap=avg(gaps);
+    const recentGap=ts.length-1-positions[positions.length-1];
+
+    let t=0,n=0;
+
+    for(const pos of positions){
+        const next=ts[pos+ctx.length];
+        if(next==="T") t++;
+        else if(next==="N") n++;
+    }
+
+    let p=(t+1)/(t+n+2);
+
+    if(avgGap>0){
+        const ratio=recentGap/avgGap;
+
+        if(ratio>=.75 && ratio<=1.25){
+            p=.5+(p-.5)*1.12;
+        }else{
+            p=.5+(p-.5)*.70;
+        }
+    }
+
+    return clamp(p,.05,.95);
+}
+
+/* =========================================================
+   CONTEXT SEQUENCE
+   Tạo dự đoán cho từng vị trí.
+   ========================================================= */
+
+function positionPrediction(pos){
+    /*
+      pos = 0..3
+      Context chính là các ký tự đã có trước vị trí đó.
+    */
+
+    const ctx=current.slice(0,pos).join("");
+    const global=positionMemory(pos);
+
+    if(pos===0){
+        return {
+            p:global.p,
+            ctx:"",
+            source:"POSITION MEMORY",
+            evidence:global.count
+        };
+    }
+
+    const back=backoffPrefix(ctx);
+    const sim=similarPattern(ctx);
+
+    /* Context dài có dữ liệu -> ưu tiên.
+       Không có -> backoff + position. */
+    let p=global.p;
+    let w=1.0;
+
+    if(back.count){
+        const bw=Math.min(5,1.3 + back.level*.9 + Math.log2(back.count+1));
+        p = (p*w + back.p*bw)/(w+bw);
+        w += bw;
+    }
+
+    if(sim.matches){
+        const sw=Math.min(2.4, .45 + Math.log2(sim.matches+1)*.35);
+        p = (p*w + sim.p*sw)/(w+sw);
+    }
+
+    return {
+        p:clamp(p,.01,.99),
+        ctx,
+        source:back.count ? back.source : "POSITION MEMORY",
+        evidence:back.count,
+        global:global.p,
+        similar:sim.p
+    };
+}
+
+
+/* =========================================================
+   CONTEXT TREE
+   ========================================================= */
+
+function contextTree(ctx=current.join("")){
+    const ts=tokens();
+
+    const result={
+        context:ctx,
+        p:.5,
+        count:0,
+        t:0,
+        n:0,
+        level:ctx.length,
+        source:"GLOBAL"
+    };
+
+    if(!ctx || !ts.length) return result;
+
+    for(let len=ctx.length;len>=1;len--){
+
+        const c=ctx.slice(0,len);
+        let t=0,n=0;
+
+        for(const token of ts){
+
+            if(!token.startsWith(c)) continue;
+
+            const next=token[len];
+
+            if(next==="T") t++;
+            else if(next==="N") n++;
+        }
+
+        const total=t+n;
+
+        if(total){
+
+            result.context=c;
+            result.p=(t+1)/(total+2);
+            result.count=total;
+            result.t=t;
+            result.n=n;
+            result.level=len;
+            result.source=
+                len===ctx.length
+                    ? "EXACT CONTEXT"
+                    : "CONTEXT BACKOFF";
+
+            return result;
+        }
+    }
+
+    return result;
+}
+
+
+/* =========================================================
+   GAP DISTRIBUTION
+   ========================================================= */
+
+function gapDistribution(ctx=current.join("")){
+
+    const ts=tokens();
+
+    const result={
+        p:.5,
+        count:0,
+        average:0,
+        recent:0,
+        gaps:[],
+        distribution:{},
+        matchedGap:null
+    };
+
+    if(!ctx || ts.length<2) return result;
+
+    const positions=[];
+
+    for(let i=0;i<ts.length;i++){
+        if(ts[i].startsWith(ctx)){
+            positions.push(i);
+        }
+    }
+
+    if(positions.length<2) return result;
+
+    const gaps=[];
+
+    for(let i=1;i<positions.length;i++){
+
+        const g=
+            positions[i]-positions[i-1];
+
+        gaps.push(g);
+
+        result.distribution[g]=
+            (result.distribution[g]||0)+1;
+    }
+
+    const average=
+        gaps.reduce((a,b)=>a+b,0)/gaps.length;
+
+    const recent=
+        ts.length-1-
+        positions[positions.length-1];
+
+    let tScore=0;
+    let nScore=0;
+    let totalScore=0;
+    let bestGap=null;
+    let bestDistance=Infinity;
+
+    for(let i=0;i<gaps.length;i++){
+
+        const g=gaps[i];
+        const distance=Math.abs(g-recent);
+
+        if(distance<bestDistance){
+            bestDistance=distance;
+            bestGap=g;
+        }
+
+        const weight=1/(1+distance);
+        const next=ts[positions[i]+1];
+
+        if(next==="T"){
+            tScore+=weight;
+            totalScore+=weight;
+        }else if(next==="N"){
+            nScore+=weight;
+            totalScore+=weight;
+        }
+    }
+
+    result.count=positions.length;
+    result.average=average;
+    result.recent=recent;
+    result.gaps=gaps;
+    result.matchedGap=bestGap;
+
+    if(totalScore){
+        result.p=(tScore+1)/(totalScore+2);
+    }
+
+    return result;
+}
+
+
+/* =========================================================
+   ADVANCED FUSION
+   ========================================================= */
+
+function advancedFusion(ctx=current.join("")){
+
+    const tree=contextTree(ctx);
+    const gap=gapDistribution(ctx);
+
+    let score=0;
+    let weight=0;
+
+    if(tree.count){
+
+        const w=Math.min(
+            2.2,
+            .7+Math.log2(tree.count+1)*.35
+        );
+
+        score+=tree.p*w;
+        weight+=w;
+    }
+
+    if(gap.count>=2){
+
+        const w=Math.min(
+            1.15,
+            .35+Math.log2(gap.count+1)*.18
+        );
+
+        score+=gap.p*w;
+        weight+=w;
+    }
+
+    return {
+        p:weight ? score/weight : .5,
+        tree,
+        gap,
+        weight
+    };
+}
+
+
+/* =========================================================
+   ADVANCED UI
+   ========================================================= */
+
+function renderAdvanced(){
+
+    const box=
+        document.getElementById("advancedStats");
+
+    if(!box) return;
+
+    if(!current.length){
+
+        box.textContent=
+            "Nhập T/N để kích hoạt Context Tree và Gap Distribution.";
+
+        return;
+    }
+
+    const a=
+        advancedFusion(current.join(""));
+
+    const dist=a.gap.distribution||{};
+
+    const list=
+        Object.keys(dist)
+            .sort((x,y)=>Number(x)-Number(y))
+            .slice(0,10)
+            .map(g=>g+"×"+dist[g])
+            .join(" · ") ||
+        "chưa đủ dữ liệu";
+
+    box.innerHTML=`
+        <div>
+            <b style="color:#00ff9c">CONTEXT TREE</b>
+            · ${a.tree.context || "GLOBAL"}
+            · ${a.tree.count} matches
+            · T ${pct(a.tree.p)}%
+            · N ${pct(1-a.tree.p)}%
+        </div>
+
+        <div style="margin-top:4px">
+            <b style="color:#00d9ff">GAP DISTRIBUTION</b>
+            · recent ${a.gap.recent || "—"}
+            · avg ${
+                a.gap.average
+                    ? a.gap.average.toFixed(1)
+                    : "—"
+            }
+            · closest ${a.gap.matchedGap || "—"}
+        </div>
+
+        <div style="margin-top:4px">
+            Gaps: ${list}
+        </div>
+
+        <div style="margin-top:4px">
+            <b style="color:#00ff9c">ADVANCED</b>
+            · ${prediction(a.p)}
+            · T ${pct(a.p)}%
+            · N ${pct(1-a.p)}%
+        </div>
+    `;
+}
+
+/* =========================================================
+   POSITION FUSION
+   Kết hợp nhiều engine để dự đoán đúng vị trí hiện tại.
+   ========================================================= */
+
+function calculate(){
+    const pos=current.length;
+
+    if(pos>=4){
+        return {
+            p:.5,
+            confidence:0,
+            position:4,
+            positionResults:[],
+            engines:[.5,.5,.5,.5,.5,.5],
+            adaptiveP:.5,
+            disagreement:0
+        };
+    }
+
+    const posResult=positionPrediction(pos);
+    const prefix=prefixMatch();
+    const similar=similarPattern();
+    const ng=ngram();
+    const mk=markov();
+    const gap=gapEngine();
+    const advanced=advancedFusion(current.join(""));
+
+    const positionP=posResult.p;
+
+    const base=[
+        prefix.p,
+        positionP,
+        similar.p,
+        ng,
+        mk,
+        gap
+    ];
+
+    /*
+      Từng engine có trọng số.
+      Prefix/context là engine chính cho vị trí 3 và 4.
+      Global position là nền khi lịch sử chưa đủ.
+    */
+    let weights=[0,0,0,.55,.45,.22];
+
+    if(prefix.count>=12) weights[0]=3.5;
+    else if(prefix.count>=7) weights[0]=2.8;
+    else if(prefix.count>=4) weights[0]=2.2;
+    else if(prefix.count>=2) weights[0]=1.5;
+    else if(prefix.count>=1) weights[0]=.9;
+
+    const posSamples=positionMemory(pos).count;
+    weights[1]=posSamples>=30 ? 1.7 :
+               posSamples>=15 ? 1.45 :
+               posSamples>=7  ? 1.2 : 1.0;
+
+    if(similar.matches>=15) weights[2]=1.7;
+    else if(similar.matches>=7) weights[2]=1.35;
+    else if(similar.matches>=3) weights[2]=1.0;
+    else weights[2]=.45;
+
+    /*
+      Adaptive learning:
+      engine nào thực tế đúng hơn sẽ được tăng/giảm nhẹ.
+    */
+    const adaptiveWeights=base.map((p,i)=>{
+        const acc=engineAccuracy(ENGINES[i],pos+1);
+        const samples=getScores().filter(x=>x.position===pos+1).length;
+        const learning=Math.min(1,samples/80);
+        const reliability=.5+(acc-.5)*learning;
+        return .75 + Math.max(0,reliability-.5)*2.2;
+    });
+
+    let score=0,total=0;
+
+    for(let i=0;i<base.length;i++){
+        const w=weights[i]*adaptiveWeights[i];
+        score+=base[i]*w;
+        total+=w;
+    }
+
+    const adaptiveP=total ? score/total : .5;
+
+    /*
+      Context Tree + Gap Distribution:
+      chỉ bổ trợ, không thay thế engine cũ.
+    */
+    let p=adaptiveP;
+
+    if(advanced.weight){
+
+        const aw=Math.min(
+            1.15,
+            .25+advanced.weight*.22
+        );
+
+        p=
+            (p+advanced.p*aw)/
+            (1+aw);
+    }
+
+    /*
+      Position model là anchor cho vị trí hiện tại.
+      Khi prefix có bằng chứng mạnh, nó được ưu tiên.
+    */
+
+    const mean=avg(base);
+    const variance=avg(base.map(x=>Math.pow(x-mean,2)));
+    const disagreement=Math.sqrt(variance);
+
+    const evidence =
+        Math.min(1,
+            (prefix.count*0.12) +
+            (positionMemory(pos).count*0.008) +
+            (similar.matches*0.006)
+        );
+
+    const rawSignal=Math.abs(p-.5)*2;
+
+    /*
+      Confidence phụ thuộc cả tín hiệu và evidence.
+      Không cho vài mẫu tạo confidence ảo.
+    */
+    const confidence=clamp(
+        rawSignal *
+        (0.35 + 0.65*evidence) *
+        (1 - Math.min(.65,disagreement*.9)),
+        0,1
+    );
+
+    /*
+      Tính dự đoán tuần tự cho toàn bộ vị trí.
+      Với vị trí đã nhập, dùng ký tự thật; vị trí kế tiếp
+      dùng current làm context.
+    */
+    const positionResults=[];
+
+    for(let i=0;i<4;i++){
+        if(i<current.length){
+            positionResults.push({
+                position:i+1,
+                known:true,
+                p:current[i]==="T" ? 1 : 0,
+                prediction:current[i],
+                ctx:current.slice(0,i).join("")
+            });
+        }else{
+            const r=positionPrediction(i);
+            positionResults.push({
+                position:i+1,
+                known:false,
+                p:r.p,
+                prediction:prediction(r.p),
+                ctx:r.ctx,
+                evidence:r.evidence,
+                source:r.source
+            });
+        }
+    }
+
+    return {
+        p,
+        confidence,
+        position:pos+1,
+        positionResults,
+        engines:base,
+        adaptiveP,
+        prefix,
+        similar,
+        advanced,
+        disagreement,
+        evidence,
+        adaptiveWeights
+    };
+}
+
+/* =========================================================
+   UPDATE
+   ========================================================= */
+
+function update(){
+    const result=calculate();
+
+    if(current.length<4){
+        pending={
+            position:current.length+1,
+            engines:{},
+            final:prediction(result.p)
+        };
+
+        const names=[
+            "PREFIX MATCH",
+            "POSITION MEMORY",
+            "SIMILAR PATTERN",
+            "N-GRAM",
+            "MARKOV",
+            "GAP"
+        ];
+
+        result.engines.forEach((p,i)=>{
+            pending.engines[names[i]]=prediction(p);
+        });
+
+        pending.engines["ADAPTIVE"]=prediction(result.adaptiveP);
+    }else{
+        pending=null;
+    }
+
+    renderFinal(result);
+    renderCurrent();
+    renderHistory();
+    renderPrefix(result);
+    renderEngines(result);
+    renderReasons(result);
+    renderAdvanced();
+    save();
+}
+
+/* =========================================================
+   ADD
+   ========================================================= */
+
+function add(ch){
+    ch=String(ch).toUpperCase();
+    if(ch!=="T" && ch!=="N") return;
+    if(current.length>=4) return;
+
+    /*
+      Chấm dự đoán ký tự vừa xuất hiện.
+      Đây là online learning theo từng vị trí.
+    */
+    if(pending && pending.position===current.length+1){
+        saveScore({
+            position:pending.position,
+            engines:pending.engines,
+            actual:ch,
+            final:pending.final,
+            context:current.join(""),
+            time:Date.now()
+        });
+    }
+
+    current.push(ch);
+
+    /*
+      ĐỦ 4 -> lưu một token độc lập.
+      TNTN vẫn là một mẫu duy nhất.
+    */
+    if(current.length===4){
+        history.push([...current]);
+        current=[];
+    }
+
+    pending=null;
+    update();
+}
+
+/* =========================================================
+   FINAL UI
+   ========================================================= */
+
+function renderFinal(result){
+    const el=document.getElementById("pred");
+
+    if(current.length>=4){
+        el.textContent="—";
+        el.classList.remove("n");
+        document.getElementById("conf").textContent="Mẫu đã hoàn tất";
+        document.getElementById("barIn").style.width="50%";
+        document.getElementById("tp").textContent="T —";
+        document.getElementById("np").textContent="N —";
+        return;
+    }
+
+    const x=prediction(result.p);
+    el.textContent=x;
+    el.classList.toggle("n",x==="N");
+
+    document.getElementById("conf").textContent =
+        "Vị trí "+result.position+
+        " · Độ tin cậy "+pct(result.confidence)+"%";
+
+    document.getElementById("barIn").style.width=pct(result.p)+"%";
+    document.getElementById("tp").textContent="T "+pct(result.p)+"%";
+    document.getElementById("np").textContent="N "+pct(1-result.p)+"%";
+}
+
+/* =========================================================
+   CURRENT
+   ========================================================= */
+
+function renderCurrent(){
+    const box=document.getElementById("slots");
+    box.innerHTML="";
+
+    for(let i=0;i<4;i++){
+        const d=document.createElement("div");
+
+        if(i<current.length){
+            d.className="slot "+(current[i]==="N"?"n":"");
+            d.textContent=current[i];
+        }else{
+            d.className="slot empty";
+            d.textContent="•";
+        }
+
+        box.appendChild(d);
+    }
+}
+
+/* =========================================================
+   HISTORY
+   ========================================================= */
+
+function renderHistory(){
+    const box=document.getElementById("history");
+    box.innerHTML="";
+
+    const start=Math.max(0,history.length-400);
+
+    for(let i=start;i<history.length;i++){
+        const d=document.createElement("div");
+        d.className="sample";
+        d.textContent=history[i].join("");
+        box.appendChild(d);
+    }
+
+    if(current.length){
+        const d=document.createElement("div");
+        d.className="sample current";
+        d.textContent=current.join("")+"·".repeat(4-current.length);
+        box.appendChild(d);
+    }
+}
+
+/* =========================================================
+   PREFIX / POSITION UI
+   ========================================================= */
+
+function renderPrefix(result){
+    const prefix=current.join("") || "—";
+    document.getElementById("prefixValue").textContent=prefix;
+
+    if(!current.length){
+        document.getElementById("prefixInfo").textContent =
+            "Nhập T/N để bắt đầu học theo từng vị trí.";
+        return;
+    }
+
+    const r=result.prefix;
+    const pm=positionMemory(current.length);
+
+    let text =
+        "Vị trí kế tiếp: "+result.position+
+        " · Exact prefix: "+r.count+
+        " mẫu";
+
+    text +=
+        " · Position memory: "+
+        pm.count+" mẫu";
+
+    if(result.similar.matches){
+        text +=
+            " · Similar: "+
+            result.similar.matches;
+    }
+
+    document.getElementById("prefixInfo").textContent=text;
+}
+
+/* =========================================================
+   ENGINE UI
+   ========================================================= */
+
+function renderEngines(result){
+    const box=document.getElementById("engines");
+    box.innerHTML="";
+
+    const values=[...result.engines,result.adaptiveP];
+
+    values.forEach((p,i)=>{
+        const d=document.createElement("div");
+        d.className="engine";
+
+        const x=prediction(p);
+
+        d.innerHTML=`
+            <div class="eName">${ENGINES[i]}</div>
+            <div class="ePred ${x==="N"?"n":""}">${x}</div>
+            <div class="ePct">
+                T ${pct(p)}% · N ${pct(1-p)}%
+            </div>
+        `;
+
+        box.appendChild(d);
+    });
+}
+
+/* =========================================================
+   REASON UI
+   ========================================================= */
+
+function renderReasons(result){
+    const box=document.getElementById("reasons");
+    box.innerHTML="";
+
+    const pos=result.positionResults;
+
+    /*
+      Hiển thị cả 4 vị trí.
+      Vị trí đang nhập sẽ được đánh dấu là dự đoán chính.
+    */
+    for(const r of pos){
+        const d=document.createElement("div");
+        d.className="reasonItem";
+
+        const x=r.known ? r.prediction : prediction(r.p);
+
+        d.innerHTML=`
+            <div class="reasonName">
+                VỊ TRÍ ${r.position} ${r.known?"· ĐÃ NHẬP":""}
+            </div>
+            <div class="reasonValue ${x==="N"?"n":""}">
+                ${x} · ${r.known ? "100.0" : pct(r.p)}%
+            </div>
+        `;
+
+        box.appendChild(d);
+    }
+
+    const verdict=document.getElementById("verdict");
+
+    if(!current.length){
+        verdict.innerHTML=`
+            <strong>POSITION LEARNING:</strong>
+            đang chờ mẫu mới.
+            <br>
+            Hệ thống sẽ học riêng vị trí 1 → 2 → 3 → 4.
+        `;
+        return;
+    }
+
+    let signal="YẾU";
+    if(result.confidence>=.25) signal="VỪA";
+    if(result.confidence>=.55) signal="MẠNH";
+
+    const source=result.prefix.count
+        ? "Exact prefix đang có dữ liệu."
+        : "Chưa đủ exact prefix — dùng backoff + position memory.";
+
+    verdict.innerHTML=`
+        <strong>FINAL:</strong>
+        ${prediction(result.p)}
+        · T ${pct(result.p)}%
+        · N ${pct(1-result.p)}%
+        <br>
+        POSITION ${result.position}
+        · SIGNAL: ${signal}
+        <br>
+        Evidence: ${pct(result.evidence)}%
+        · ${source}
+        <br>
+        ${result.disagreement>.12
+            ? "Các engine phân kỳ — hệ thống giảm độ tin cậy."
+            : "Các engine tương đối đồng thuận."}
+    `;
+}
+
+/* =========================================================
+   UNDO
+   ========================================================= */
+
+function undo(){
+    if(current.length){
+        current.pop();
+    }else if(history.length){
+        current=history.pop().slice();
+        current.pop();
+    }else{
+        return;
+    }
+
+    const data=getScores();
+    if(data.length) data.pop();
+    localStorage.setItem(KEY+"_SCORES",JSON.stringify(data));
+
+    pending=null;
+    update();
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+function resetAll(){
+    if(!confirm("Xóa toàn bộ lịch sử và dữ liệu học?")) return;
+
+    history=[];
+    current=[];
+    pending=null;
+
+    localStorage.removeItem(KEY);
+    localStorage.removeItem(KEY+"_SCORES");
+
+    update();
+}
+
+/* =========================================================
+   KEYBOARD
+   ========================================================= */
+
+document.addEventListener("keydown",e=>{
+    const k=e.key.toUpperCase();
+
+    if(k==="T") add("T");
+    else if(k==="N") add("N");
+    else if(e.key==="Backspace") undo();
+});
+
+/* =========================================================
+   START
+   ========================================================= */
+
+load();
+update();
+</script>
+
+</body>
+</html>
